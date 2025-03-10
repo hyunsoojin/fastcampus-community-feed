@@ -42,4 +42,8 @@ public class Post {
         this.state = state;
         this.content.updateContent(updatedContent);
     }
+
+    public int getLikeCount() {
+        return likeCount.getCount();
+    }
 }

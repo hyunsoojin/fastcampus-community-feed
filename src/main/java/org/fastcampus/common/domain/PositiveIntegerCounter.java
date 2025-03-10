@@ -11,9 +11,13 @@ public class PositiveIntegerCounter {
         this.count++;
     }
     public void decrease(){
-        if(count < 0){
+        if(count <= 0){
             return;
         }
         this.count--;
+    }
+
+    public int getCount() {
+        return count;
     }
 }
