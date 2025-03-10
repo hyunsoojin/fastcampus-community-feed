@@ -6,6 +6,7 @@ import org.fastcampus.user.domain.UserInfo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PostTest {
     private final UserInfo info = new UserInfo("name", "url");
@@ -24,6 +25,34 @@ public class PostTest {
     }
 
     @Test
+    void givenPostCreatedwhenUnlikeThenLikeCountShouldBe0(){
+        //given
+        post.like(otherUser);
 
+        //when
+        post.unlike(otherUser);
+
+        //then
+        assertEquals(0, post.getLikeCount());
+    }
+
+    @Test
+    void givenPostCreated_whenUpdateContent_thenContentShouldBeUpdated(){
+        //given
+        String updatedContent = "updated content";
+        PostContent postContent = new PostContent(updatedContent);
+
+        //when
+        post.updatePost(user, updatedContent, null);
+
+        //then
+        assertEquals(updatedContent, post.getContent());
+    }
+
+    @Test
+    void givenPostCreated_whenUpdateOtherUser_thenThrowError(){
+        //when,then
+        assertThrows(IllegalArgumentException.class, () -> post.updatePost(otherUser, "updated content", null));
+    }
 
 }
