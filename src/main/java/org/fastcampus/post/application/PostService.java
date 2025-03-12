@@ -39,7 +39,7 @@ public class PostService {
     }
 
     public void likePost(LikeRequestDto dto){
-        Post post = getPost(dto.postId());
+        Post post = getPost(dto.targetId());
         User user = userService.getUser(dto.userId());
 
         if(likeRepository.checkLike(post, user)){
@@ -51,7 +51,7 @@ public class PostService {
     }
 
     public void unlikePost(LikeRequestDto dto){
-        Post post = getPost(dto.postId());
+        Post post = getPost(dto.targetId());
         User user = userService.getUser(dto.userId());
 
         if(likeRepository.checkLike(post, user)){
