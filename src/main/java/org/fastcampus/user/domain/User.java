@@ -12,20 +12,14 @@ import org.fastcampus.common.domain.PositiveIntegerCounter;
 
 import java.util.Objects;
 
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
 @Builder
+@AllArgsConstructor
 public class User {
 
-    @Id
-    @Getter
     private Long id;
-    @Embedded
     private UserInfo info;
-    @Embedded
     private PositiveIntegerCounter followingCount;
-    @Embedded
     private PositiveIntegerCounter followerCount;
 
     public User(Long id, UserInfo userInfo) {

@@ -1,8 +1,8 @@
 plugins {
     id("org.springframework.boot") version "3.3.1"
     id("io.spring.dependency-management") version "1.1.5"
-    kotlin("jvm") version "1.6.10"
-    kotlin("plugin.spring") version "1.6.10"
+    kotlin("jvm") version "1.9.22"
+    kotlin("plugin.spring") version "1.9.22"
 }
 
 repositories {
@@ -19,6 +19,12 @@ dependencies {
     //mysql
     runtimeOnly("com.mysql:mysql-connector-j")
 
+    //querydsl
+    implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
+    annotationProcessor("com.querydsl:querydsl-apt:5.0.0:jakarta")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+
     //lombok
     implementation("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
@@ -31,4 +37,24 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+/**
+ *  QueryDSL Build Options
+ */
+
+val querydslDir = "${layout.projectDirectory}/build/generated/querydsl"
+
+sourceSets{
+    getByName("main").java.srcDir(querydslDir)
+}
+
+tasks.withType<JavaCompile> {
+    options.generatedSourceOutputDirectory = file(querydslDir)
+}
+
+tasks.named("clean"){
+    doLast{
+        file(querydslDir).deleteRecursively()
+    }
 }
