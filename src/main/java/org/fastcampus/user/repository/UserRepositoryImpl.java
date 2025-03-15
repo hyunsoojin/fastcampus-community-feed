@@ -1,6 +1,7 @@
-package org.fastcampus.user.application.interfaces;
+package org.fastcampus.user.repository;
 
 import lombok.RequiredArgsConstructor;
+import org.fastcampus.user.application.interfaces.UserRepository;
 import org.fastcampus.user.domain.User;
 import org.fastcampus.user.repository.entity.UserEntity;
 import org.fastcampus.user.repository.jpa.JpaUserRepository;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
 @Repository
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
 
     private final JpaUserRepository jpaUserRepository;
 
