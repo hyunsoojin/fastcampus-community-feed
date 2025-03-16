@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import org.fastcampus.common.repository.entity.TimeBaseEntity;
 
 @Entity
-@Table(name="cummunity_user_relation")
+@Table(name="community_user_relation")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class JpaUserListPagingQuertyRepository {
+public class JpaUserListPagingQueryRepository {
     private final JPAQueryFactory jpaQueryFactory;
     private static final QUserEntity user = QUserEntity.userEntity;
     private static final QUserRelationEntity relation = QUserRelationEntity.userRelationEntity;
