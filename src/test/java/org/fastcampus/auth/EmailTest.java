@@ -20,6 +20,7 @@ public class EmailTest {
     @ParameterizedTest
     @ValueSource(strings = {"valid/@ab", "naver.com", "natty#@naver", "안녕@하세요.com"})
     void givenInvalidEmail_whenCreateEmail_thenThrowError(String email){
+
         //then
         assertThrows(IllegalArgumentException.class, ()->Email.createEmail(email));
     }
