@@ -10,7 +10,9 @@ import org.fastcampus.post.repository.entity.post.PostEntity;
 import org.fastcampus.user.domain.User;
 import org.fastcampus.user.domain.UserInfo;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -27,6 +29,9 @@ public class UserEntity extends TimeBaseEntity {
     private String profileImageUrl;
     private Integer followingCount;
     private Integer followerCount;
+    @CreatedDate
+    @Column(updatable = false)
+    private LocalDate regDate;
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<PostEntity> posts;

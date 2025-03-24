@@ -9,12 +9,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.fastcampus.acceptance.steps.FeedAcceptanceSteps.requestCreatePost;
-import static org.fastcampus.acceptance.steps.FeedAcceptanceSteps.requestFeed;
+import static org.fastcampus.acceptance.steps.FeedAcceptanceSteps.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class FeedAcceptanceTest extends AcceptanceTestTemplate {
+
+    private String token;
+
     /**
      *  User 1 --- follow ---> User 2
      *  User 1 --- follow ---> User 3
@@ -22,6 +24,7 @@ public class FeedAcceptanceTest extends AcceptanceTestTemplate {
     @BeforeEach
     void setUp(){
         super.init();
+        this.token = login("user1@test.com");
     }
 
     /**
@@ -34,10 +37,18 @@ public class FeedAcceptanceTest extends AcceptanceTestTemplate {
         CreatePostRequestDto dto = new CreatePostRequestDto(2L, "user 1 can get this post", PostPublicationState.PUBLIC);
         Long createdPostId = requestCreatePost(dto);
         // when, 팔로워 피드를 요청
-        List<GetPostContentResponseDto> result = requestFeed(1L);
+        List<GetPostContentResponseDto> result = requestFeed(token);
         // then
         assertEquals(1, result.size());
         assertEquals(createdPostId, result.get(0).getId());
+    }
+
+    @Test
+    void givenUserHasFollower_whenFollowerUserRequestFeedWithInvalidToken_thenFollowerCanGetPostFromFeed(){
+        // when, 팔로워 피드를 요청
+        Integer code = requestFeedCode("abcd");
+        // then
+        assertEquals(400, code);
     }
 
 
