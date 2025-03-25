@@ -24,7 +24,7 @@ public class FeedAcceptanceTest extends AcceptanceTestTemplate {
     @BeforeEach
     void setUp(){
         super.init();
-        this.token = login("user1@test.com");
+        this.token = login("user1@user.com");
     }
 
     /**

@@ -6,6 +6,8 @@ import org.fastcampus.auth.application.interfaces.UserAuthRepository;
 import org.fastcampus.auth.domain.UserAuth;
 import org.fastcampus.auth.repository.entity.UserAuthEntity;
 import org.fastcampus.auth.repository.jpa.JpaUserAuthRepository;
+import org.fastcampus.message.repository.JpaFcmTokenRepository;
+import org.fastcampus.message.repository.entity.FcmTokenEntity;
 import org.fastcampus.user.application.interfaces.UserRepository;
 import org.fastcampus.user.domain.User;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,8 @@ public class UserAuthRepositoryImpl implements UserAuthRepository {
 
     private final JpaUserAuthRepository jpaUserAuthRepository;
     private final UserRepository userRepository;
+    private final JpaFcmTokenRepository jpaFcmTokenRepository;
+
 
     @Override
     @Transactional
@@ -28,7 +32,7 @@ public class UserAuthRepositoryImpl implements UserAuthRepository {
 
     @Override
     @Transactional
-    public UserAuth loginUser(String email, String password) {
+    public UserAuth loginUser(String email, String password, String fcmToken) {
         UserAuthEntity userAuthEntity = jpaUserAuthRepository.findById(email).orElseThrow();
         UserAuth userAuth = userAuthEntity.toUserAuth();
 
@@ -37,6 +41,7 @@ public class UserAuthRepositoryImpl implements UserAuthRepository {
         }
 
         userAuthEntity.updateLastLoginAt();
+        jpaFcmTokenRepository.save(new FcmTokenEntity(userAuth.getUserId(), fcmToken));
         return userAuth;
     }
 }
