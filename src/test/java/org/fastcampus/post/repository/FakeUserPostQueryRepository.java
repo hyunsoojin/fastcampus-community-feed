@@ -15,18 +15,20 @@ import java.util.List;
 @Profile("test")
 @RequiredArgsConstructor
 public class FakeUserPostQueryRepository implements UserPostQueueQueryRepository {
-    private final FakeuserQueueRedisRepository fakeuserQueueRedisRepository;
+//    private final FakeuserQueueRedisRepository fakeuserQueueRedisRepository;
 
     @Override
     public List<GetPostContentResponseDto> getContentResponse(Long userId, Long lastPostId) {
-        List<PostEntity> postEntities = fakeuserQueueRedisRepository.getPostListByUserId(userId);
+  //      List<PostEntity> postEntities = fakeuserQueueRedisRepository.getPostListByUserId(userId);
         List<GetPostContentResponseDto> result = new ArrayList<>();
+        /*
         for (PostEntity postEntity : postEntities) {
             GetPostContentResponseDto res = GetPostContentResponseDto.builder()
                     .id(postEntity.getId())
                     .build();
             result.add(res);
         }
+         */
         return result;
     }
 

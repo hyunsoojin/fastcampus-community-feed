@@ -20,7 +20,7 @@ public class DataLoader {
 
     public void loadData() {
         // user 1, 2, 3 생성
-        for ( int i = 1; i < 4; i++){
+        for ( int i = 1; i < 100; i++){
             createUser("user" + i + "@test.com");
         }
         followUser(new FollowUserRequestDto(1L, 2L));

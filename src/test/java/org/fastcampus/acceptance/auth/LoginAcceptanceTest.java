@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class LoginAcceptanceTest extends AcceptanceTestTemplate {
-    private final String email = "email@email.com";
+    private final String email = "user1@test.com";
 
     @BeforeEach
     void setUp() {
